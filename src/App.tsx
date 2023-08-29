@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
 const HomePage = lazy(() => import("./pages/home/HomePage"));
+const AboutPage = lazy(() => import("./pages/about/AboutPage"));
 const TodoPage = lazy(() => import("./pages/todo/TodoPage"));
 
 // Mobx
@@ -23,6 +24,7 @@ function App() {
         >
           <Routes>
             <Route element={<HomePage store={store} />} path="/" />
+            <Route element={<AboutPage store={store} />} path="/about" />
             <Route element={<TodoPage />} path="/todo" />
           </Routes>
         </Suspense>

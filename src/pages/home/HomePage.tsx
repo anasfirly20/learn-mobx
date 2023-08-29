@@ -9,6 +9,8 @@ type TProps = {
   };
 };
 
+import AboutPage from "../about/AboutPage";
+
 const HomePage = ({ store }: TProps): React.JSX.Element => {
   // Change user
   const changeUser = () => {
@@ -28,12 +30,11 @@ const HomePage = ({ store }: TProps): React.JSX.Element => {
       </h1>
       <button onClick={changeUser}>Update User</button>
       <button onClick={addSubject}>ADD SUBJECT</button>
-      {
-        // LOOPING SBJECTS ARRAY PRINING HERE, ADD SUB BUTTON CREATED
-        store.userInfo.subject.map((key, index) => (
-          <p key={index}>{key}</p>
-        ))
-      }
+      {store.userInfo.subject.map((key, index) => (
+        <p key={index}>{key}</p>
+      ))}
+      <h1>ABOUT DOWN</h1>
+      <AboutPage store={store} />
     </article>
   );
 };

@@ -4,7 +4,7 @@ import { action, computed, makeObservable, observable, autorun, runInAction } fr
 class UserStore {
     userInfo = {
         id: 'C117',
-        name: 'Anas',
+        name: 'Firly',
         subject: ['English', 'CS', 'Maths']
     }
 
@@ -27,7 +27,7 @@ class UserStore {
     }
 
     logUserDetails = () => {
-        console.log(`Subject length: ${this.totalSubject}`);
+        console.log(`Subject length: ${this.totalSubject}, Name: ${this.userInfo.name}`);
     }
 
     updateUser = (name: string) => {

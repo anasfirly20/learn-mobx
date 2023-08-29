@@ -5,7 +5,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 const HomePage = lazy(() => import("./pages/home/HomePage"));
 const TodoPage = lazy(() => import("./pages/todo/TodoPage"));
 
+// Mobx
+import UserStore from "./store/userStore";
+
 function App() {
+  const store = new UserStore();
+
   return (
     <>
       <BrowserRouter>
@@ -17,8 +22,7 @@ function App() {
           }
         >
           <Routes>
-            <Route element={<HomePage />} path="/" />
-            <Route element={<HomePage />} path="*" />
+            <Route element={<HomePage store={store} />} path="/" />
             <Route element={<TodoPage />} path="/todo" />
           </Routes>
         </Suspense>

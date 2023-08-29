@@ -1,4 +1,4 @@
-import store from "../../store/TodoStore";
+import store from "../../store/todoStore";
 import { observer } from "mobx-react";
 
 const TodoPage = (): React.JSX.Element => {

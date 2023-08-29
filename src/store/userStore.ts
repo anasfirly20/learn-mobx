@@ -8,11 +8,12 @@ class UserStore {
         subject: ['English', 'CS', 'Maths']
     }
 
+    // NOTE: MakeObservable, autorun and runInAction are written in constructor
     constructor() {
         makeObservable(this, {
             userInfo: observable,
             totalSubject: computed,
-            updateUser: action,
+            updateUser: action,      // MOBX SHOULD KNOW - UPDATE STATE
             addSubject: action
         });
         autorun(this.logUserDetails);  // WILL RUN AFTER EVERY ACTION INVOKE
@@ -21,6 +22,7 @@ class UserStore {
 
     // All getters behave as computed i.e. instantly calculate without action
     get totalSubject() {
+        console.log(`getter`);
         return this.userInfo.subject.length;
     }
 
@@ -29,7 +31,7 @@ class UserStore {
     }
 
     updateUser = (name: string) => {
-        return 'NA';
+        this.userInfo.name = name; // UPDATE STATE CODE
     }
 
     addSubject = (data: string) => {
@@ -38,7 +40,7 @@ class UserStore {
 
 
     prefetchData = () => {
-        console.log('printing prefetchData...');
+        console.log('run in action...'); // ADDED CONSOLE
     }
 }
 export default UserStore;

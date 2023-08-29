@@ -1,4 +1,4 @@
-import { makeObservable, makeAutoObservable, observable, computed } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 type TTodos = {
     id: number;

@@ -1,4 +1,4 @@
-import store from "../../mobx-store/TodoStore";
+import store from "../../store/TodoStore";
 import { observer } from "mobx-react";
 
 const TodoPage = (): React.JSX.Element => {
@@ -40,11 +40,7 @@ const TodoPage = (): React.JSX.Element => {
         {store.todos.map((e) => {
           return (
             <section key={e.id} className="flex gap-3">
-              <input
-                type="checkbox"
-                checked={e.status}
-                onChange={() => handleCheckboxChange(e.id)}
-              />
+              <input type="checkbox" checked={e.status} onChange={() => {}} />
               <p className={e.status ? "line-through" : ""}>{e.name}</p>
             </section>
           );

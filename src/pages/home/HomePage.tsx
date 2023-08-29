@@ -5,12 +5,19 @@ type TProps = {
   store: {
     userInfo: TUserInfo;
     updateUser: (name: string) => void;
+    addSubject: (name: string) => void;
   };
 };
 
 const HomePage = ({ store }: TProps): React.JSX.Element => {
+  // Change user
   const changeUser = () => {
     store.updateUser("New Data");
+  };
+
+  // Add subject
+  const addSubject = () => {
+    store.addSubject("Aeronotics");
   };
 
   return (
@@ -20,6 +27,13 @@ const HomePage = ({ store }: TProps): React.JSX.Element => {
         {store.userInfo.name} - {store.userInfo.id}
       </h1>
       <button onClick={changeUser}>Update User</button>
+      <button onClick={addSubject}>ADD SUBJECT</button>
+      {
+        // LOOPING SBJECTS ARRAY PRINING HERE, ADD SUB BUTTON CREATED
+        store.userInfo.subject.map((key, index) => (
+          <p key={index}>{key}</p>
+        ))
+      }
     </article>
   );
 };

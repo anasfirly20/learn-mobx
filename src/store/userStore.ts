@@ -35,7 +35,7 @@ class UserStore {
     }
 
     addSubject = (data: string) => {
-        return 'NA';
+        this.userInfo.subject.push(data);
     }
 
 

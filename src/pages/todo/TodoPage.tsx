@@ -1,54 +1,23 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import store from "../../mobx-store/TodoStore";
+import { observer } from "mobx-react";
 
-type TTodo = {
-  id: string;
-  name: string;
-  status: boolean;
-};
-
-export default function TodoPage(): React.JSX.Element {
-  const [initial, setInitial] = useState("");
-  const [todo, setTodo] = useState<TTodo[]>([
-    {
-      id: uuidv4(),
-      name: "Wash Laundry",
-      status: false,
-    },
-  ]);
-
+const TodoPage = (): React.JSX.Element => {
   const handleAdd = () => {
-    if (initial) {
-      const newTodo = {
-        id: uuidv4(),
-        name: initial,
-        status: false,
-      };
-      setTodo([...todo, newTodo]);
-      setInitial("");
+    if (store.newTodo) {
+      store.addTodo();
     }
   };
 
-  const handleCheckboxChange = (id: string) => {
-    setTodo((prevTodo) =>
-      prevTodo.map((todoItem) =>
-        todoItem.id === id
-          ? { ...todoItem, status: !todoItem.status }
-          : todoItem
-      )
-    );
-  };
-
   return (
-    <article className="px-[6vw] py-[10vh]">
+    <article className="p-[2vw] xl:p-[6vw]">
       <section className="flex justify-center gap-5">
         <input
           type="text"
-          className="border-b border-b-slate-400 outline-none w-[50%] px-3"
+          className="border-b border-b-slate-400 outline-none w-[70%] xl:w-[50%] px-3"
           onChange={(e) => {
-            setInitial(e.target.value);
+            store.newTodo = e.target.value;
           }}
-          value={initial}
+          value={store.newTodo}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               handleAdd();
@@ -56,8 +25,8 @@ export default function TodoPage(): React.JSX.Element {
           }}
         />
         <button
-          className={`text-white font-semibold w-[5%] py-3 px-3 ${
-            initial
+          className={`text-white font-semibold w-[30%] xl:w-[5%] py-3 px-3 ${
+            store.newTodo
               ? "bg-blue-600 hover:bg-blue-500 active:bg-blue-600"
               : "bg-slate-200 cursor-not-allowed"
           }`}
@@ -68,7 +37,7 @@ export default function TodoPage(): React.JSX.Element {
         </button>
       </section>
       <section className="mt-10">
-        {todo.map((e) => {
+        {store.todos.map((e) => {
           return (
             <section key={e.id} className="flex gap-3">
               <input
@@ -83,4 +52,6 @@ export default function TodoPage(): React.JSX.Element {
       </section>
     </article>
   );
-}
+};
+
+export default observer(TodoPage);
